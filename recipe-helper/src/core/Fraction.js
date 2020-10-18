@@ -5,6 +5,20 @@ function gcd(a, b) {
 	return b;
 }
 
+function fractionFromString(s) {
+  var split = s.split(" ");
+  if (split.length === 1) {
+    return new Fraction(parseInt(s), 1);
+  } else {
+    const wholePart = parseInt(split[0]);
+    const frac = split[1];
+    const fracSplit = frac.split("/");
+    const fracNum = parseInt(fracSplit[0]);
+    const fracDen = parseInt(fracSplit[1]);
+    return new Fraction(wholePart * fracDen + fracNum, fracDen);
+  }
+}
+
 class Fraction {
 	constructor(numerator, denominator) {
 		// first reduce via gcd
@@ -39,4 +53,5 @@ class Fraction {
   }
 }
 
+export { fractionFromString, Fraction };
 export default Fraction;

@@ -2,10 +2,12 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import NavItem from 'react-bootstrap/NavItem';
 
 import About from './routes/About';
 import AddRecipe from './routes/AddRecipe';
@@ -30,6 +32,8 @@ class App extends React.Component {
                                    new Fraction(4, 1),
                                    "An exquisite delicacy from Chef Neil"));
 
+    
+
     defaultRecipes.push(new Recipe("Shin Ramyun",
                                    "def",
                                    [
@@ -38,17 +42,9 @@ class App extends React.Component {
                                    new Fraction(4, 1),
                                    "Patrick's favorite thing to cook"));
 
-    console.log(defaultRecipes[0]);
-
-    for (var i = 0; i < 1; i++) {
-      defaultRecipes = defaultRecipes.concat(defaultRecipes);
-    }
-
     this.state = {
       recipes: defaultRecipes //[]
     };
-
-    console.log(this);
 
     this.updateRecipes = this.updateRecipes.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
@@ -69,35 +65,44 @@ class App extends React.Component {
   render() {
     return (
       <div className="main-page">
-        <Navbar className="navbar-custom">
-          <Navbar.Brand href="#">NomNom</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/recipes">My Recipes</Nav.Link>
-            <Nav.Link href="/addrecipe">Add a Recipe</Nav.Link>
-          </Nav>
-        </Navbar>
-        <div className="row justify-content-center ml-0 mr-0">
-          <Router>
+        <Router>
+          <Navbar className="navbar-custom">
+            <Navbar.Brand href="">NomNom</Navbar.Brand>
+            <Nav className="mr-auto">
+              <LinkContainer className="custom-navitem" to="/about">
+                <NavItem>About</NavItem>
+              </LinkContainer>
+              <LinkContainer className="custom-navitem" to="/recipes">
+                <NavItem>My Recipes</NavItem>
+              </LinkContainer>
+              <LinkContainer className="custom-navitem" to="/addrecipe">
+                <NavItem>Add a Recipe</NavItem>
+              </LinkContainer>
+            </Nav>
+          </Navbar>
+          <div className="row justify-content-center ml-0 mr-0">
             <Switch>
-              <Route path="/about">
+              <Route exact path="/about">
                 <div className="pt-3 col-md-6">
                   <About />
                 </div>
               </Route>
-              <Route path="/recipes">
+              <Route exact path="/recipes">
                 <div className="pt-3 col-md-6">
                   <ListRecipes recipes={this.state.recipes} />
                 </div>
               </Route>
-              <Route path="/addrecipe">
+              <Route exact path="/addrecipe">
                 <div className="pt-3 col-md-6">
                   <AddRecipe callback={this.addRecipe} />
                 </div>
               </Route>
+              <Route exact path="/">
+                <Redirect to="/about" />
+              </Route>
             </Switch>
-          </Router>
-        </div>
+          </div>
+        </Router>
       </div>
     );
   }
