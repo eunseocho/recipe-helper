@@ -127,7 +127,7 @@ class Recipe {
   }
 
   multiplyBy(scale) {
-    newIngredients = ingredients.map(ingredient => ingredient.multiplyBy(scale));
+    var newIngredients = this.ingredients.map(ingredient => ingredient.multiplyBy(scale));
     return new Recipe(this.recipeName,
                       this.recipeID,
                       newIngredients,
@@ -146,7 +146,7 @@ class Ingredient {
   }
 
   multiplyBy(scale) {
-    newAmount = amount.multiply(scale);
+    var newAmount = this.amount.multiply(scale);
     return new Ingredient(this.name,
                           newAmount,
                           this.unit);
