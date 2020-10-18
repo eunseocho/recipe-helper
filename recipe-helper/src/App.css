@@ -1,11 +1,39 @@
+:root {
+  --nav-text-color: #D9B0E9;
+  --nav-brand-color: #C09BCF;
+  --nav-hover-color: #8E5BA2;
+  --navbar-bg-color: #310A40;
+  --page-bg-color: #F4B6D4;
+}
+
 .navbar-custom {
-  background-color: green;
+  background-color: var(--navbar-bg-color);
 }
 
 .navbar-light {
   color: blue;
 }
 
+.navbar-light .navbar-brand {
+  font-size: xx-large;
+  color: var(--nav-brand-color);
+}
+
+.navbar-light .navbar-brand:hover {
+  color: var(--nav-hover-color);
+}
+
+.navbar-expand .navbar-nav .nav-link {
+  font-size: x-large;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: var(--nav-text-color);
+}
+
+.navbar-expand .navbar-nav .nav-link:hover {
+  color: var(--nav-hover-color);
+}
+
 body {
-  background-color: pink;
+  background-color: var(--page-bg-color);
 }
