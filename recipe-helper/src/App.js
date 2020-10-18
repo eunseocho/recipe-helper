@@ -76,4 +76,42 @@ class AddRecipe extends React.Component {
   }
 }
 
+class Recipe {
+  constructor(recipeName, recipeID, ingredients, servings, description) {
+    this.recipeName = recipeName;
+    this.recipeID = recipeID;
+    this.ingredients = ingredients;
+    this.servings = servings;
+    this.description = description;
+
+    this.multiplyBy = this.multiplyBy.bind(this);
+  }
+
+  multiplyBy(scale) {
+    newIngredients = ingredients.map(ingredient => ingredient.multiplyBy(scale));
+    return new Recipe(this.recipeName,
+                      this.recipeID,
+                      newIngredients,
+                      this.servings,
+                      this.description);
+  }
+}
+
+class Ingredient {
+  constructor(name, amount, unit) {
+    this.name = name;
+    this.amount = amount;
+    this.unit = unit;
+
+    this.multiplyBy = this.multiplyBy.bind(this);
+  }
+
+  multiplyBy(scale) {
+    newAmount = amount.multiply(scale);
+    return new Ingredient(this.name,
+                          newAmount,
+                          this.unit);
+  }
+}
+
 export default App;
