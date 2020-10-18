@@ -1,12 +1,9 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card'
+import { LinkContainer } from 'react-router-bootstrap';
 import '../App.css';
 
 class ListRecipes extends React.Component {
-	constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="container p-3 rounded-container rounded-20">
@@ -30,21 +27,19 @@ class ListRecipes extends React.Component {
 }
 
 class RecipeCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <Card>
-        <Card.Header as="h3"> Recipe: {this.props.recipe.recipeName} </Card.Header>
-        <Card.Body>
-          <Card.Title> {this.props.recipe.description} </Card.Title>
-          <Card.Text>
-            Servings: {this.props.recipe.servings.asMixedNumberString()}
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      <LinkContainer to={"/recipe/" + this.props.recipe.recipeID}>
+        <Card>
+          <Card.Header as="h3"> Recipe: {this.props.recipe.recipeName} </Card.Header>
+          <Card.Body>
+            <Card.Title> {this.props.recipe.description} </Card.Title>
+            <Card.Text>
+              Servings: {this.props.recipe.servings.asMixedNumberString()}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </LinkContainer>
     );
   }
 }

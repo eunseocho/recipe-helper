@@ -12,10 +12,12 @@ import NavItem from 'react-bootstrap/NavItem';
 import About from './routes/About';
 import AddRecipe from './routes/AddRecipe';
 import ListRecipes from './routes/ListRecipes';
+import ShowRecipe from './routes/ShowRecipe';
 
 import Fraction from './core/Fraction';
 import Ingredient from './core/Ingredient';
 import Recipe from './core/Recipe';
+import { generateRecipeID } from './core/util';
 
 
 class App extends React.Component {
@@ -25,17 +27,25 @@ class App extends React.Component {
     var defaultRecipes = [];
 
     defaultRecipes.push(new Recipe("Cashew Chicken",
-                                   "abc",
+                                   generateRecipeID(),
                                    [
-                                      new Ingredient("Chicken", new Fraction(1, 1), "lb"),
-                                      new Ingredient("Cashews", new Fraction(1, 1), "cup")],
+                                      new Ingredient("roasted, unsalted cashews", new Fraction(3, 4), "cup"),
+                                      new Ingredient("water", new Fraction(1, 4), "cup"),
+                                      new Ingredient("cornstarch", new Fraction(2, 1), "tsp"),
+                                      new Ingredient("hoisin sauce", new Fraction(4, 1), "tbsp"),
+                                      new Ingredient("soy sauce", new Fraction(1, 1), "tbsp"),
+                                      new Ingredient("chicken thigh", new Fraction(3, 2), "lb"),
+                                      new Ingredient("vegetable oil", new Fraction(2, 1), "tbsp"),
+                                      new Ingredient("garlic, minced", new Fraction(6, 1), "clove"),
+                                      new Ingredient("scallions", new Fraction(8, 1), ""),
+                                      new Ingredient("rice vinegar", new Fraction(2, 1), "tbsp"),
+                                      new Ingredient("sesame oil", new Fraction(1, 2), "tsp")],
                                    new Fraction(4, 1),
                                    "An exquisite delicacy from Chef Neil"));
-
     
 
     defaultRecipes.push(new Recipe("Shin Ramyun",
-                                   "def",
+                                   generateRecipeID(),
                                    [
                                       new Ingredient("Shin Ramyun", new Fraction(3, 1), "packet"),
                                       new Ingredient("Egg", new Fraction(3, 1), "")],
@@ -81,26 +91,27 @@ class App extends React.Component {
             </Nav>
           </Navbar>
           <div className="row justify-content-center ml-0 mr-0">
-            <Switch>
-              <Route exact path="/about">
-                <div className="pt-3 col-md-6">
+            <div className="pt-3 col-md-6">
+              <Switch>
+                <Route exact path="/about">
                   <About />
-                </div>
-              </Route>
-              <Route exact path="/recipes">
-                <div className="pt-3 col-md-6">
+                </Route>
+                <Route exact path="/recipes">
                   <ListRecipes recipes={this.state.recipes} />
-                </div>
-              </Route>
-              <Route exact path="/addrecipe">
-                <div className="pt-3 col-md-6">
+                </Route>
+                <Route exact path="/addrecipe">
                   <AddRecipe callback={this.addRecipe} />
-                </div>
-              </Route>
-              <Route exact path="/">
-                <Redirect to="/about" />
-              </Route>
-            </Switch>
+                </Route>
+                <Route path="/recipe/:recipeID" render={
+                  (props) => (
+                      <ShowRecipe {...props} recipes={this.state.recipes} />
+                    )
+                } />
+                <Route exact path="/">
+                  <Redirect to="/about" />
+                </Route>
+              </Switch>
+            </div>
           </div>
         </Router>
       </div>

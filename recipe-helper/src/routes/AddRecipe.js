@@ -8,7 +8,8 @@ import Button from 'react-bootstrap/Button';
 
 import Ingredient from '../core/Ingredient';
 import Recipe from '../core/Recipe';
-import { fractionFromString, Fraction } from '../core/Fraction';
+import { fractionFromString } from '../core/Fraction';
+import { generateRecipeID } from '../core/util';
 
 class AddRecipe extends React.Component {
   constructor(props) {
@@ -29,9 +30,7 @@ class AddRecipe extends React.Component {
     const servingCount = fractionFromString(this.refs.servingCount.value);
     const ingredients = this.state.ingredientList;
 
-    this.props.callback(new Recipe(recipeName, "abc", ingredients, servingCount, recipeDescription));
-
-    console.log("added recipe");
+    this.props.callback(new Recipe(recipeName, generateRecipeID(), ingredients, servingCount, recipeDescription));
   }
 
   addIngredient() {

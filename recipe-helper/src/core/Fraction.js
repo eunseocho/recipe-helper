@@ -6,16 +6,20 @@ function gcd(a, b) {
 }
 
 function fractionFromString(s) {
-  var split = s.split(" ");
-  if (split.length === 1) {
-    return new Fraction(parseInt(s), 1);
-  } else {
-    const wholePart = parseInt(split[0]);
-    const frac = split[1];
-    const fracSplit = frac.split("/");
-    const fracNum = parseInt(fracSplit[0]);
-    const fracDen = parseInt(fracSplit[1]);
-    return new Fraction(wholePart * fracDen + fracNum, fracDen);
+  try {
+    var split = s.split(" ");
+    if (split.length === 1) {
+      return new Fraction(parseInt(s), 1);
+    } else {
+      const wholePart = parseInt(split[0]);
+      const frac = split[1];
+      const fracSplit = frac.split("/");
+      const fracNum = parseInt(fracSplit[0]);
+      const fracDen = parseInt(fracSplit[1]);
+      return new Fraction(wholePart * fracDen + fracNum, fracDen);
+    }
+  } catch (err) {
+    return Fraction(1, 1);
   }
 }
 
@@ -28,10 +32,16 @@ class Fraction {
 
     this.asFractionString = this.asFractionString.bind(this);
     this.asMixedNumberString = this.asMixedNumberString.bind(this);
+    this.multiply = this.multiply.bind(this);
+    this.divide = this.divide.bind(this);
 	}
 
   multiply(argument) {
     return new Fraction(this.numerator * argument.numerator, this.denominator * argument.denominator);
+  }
+
+  divide(argument) {
+    return new Fraction(this.numerator * argument.denominator, this.denominator * argument.numerator);
   }
 
   asFractionString() {
