@@ -9,7 +9,14 @@ function fractionFromString(s) {
   try {
     var split = s.split(" ");
     if (split.length === 1) {
-      return new Fraction(parseInt(s), 1);
+      if (s.includes("/")) {
+        const fracSplit = s.split("/");
+        const fracNum = parseInt(fracSplit[0]);
+        const fracDen = parseInt(fracSplit[1]);
+        return new Fraction(fracNum, fracDen);
+      } else {
+        return new Fraction(parseInt(s), 1);
+      }
     } else {
       const wholePart = parseInt(split[0]);
       const frac = split[1];

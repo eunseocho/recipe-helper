@@ -14,7 +14,7 @@ import AddRecipe from './routes/AddRecipe';
 import ListRecipes from './routes/ListRecipes';
 import ShowRecipe from './routes/ShowRecipe';
 
-import Fraction from './core/Fraction';
+import { Fraction, fractionFromString } from './core/Fraction';
 import Ingredient from './core/Ingredient';
 import Recipe from './core/Recipe';
 import { generateRecipeID } from './core/util';
@@ -42,15 +42,28 @@ class App extends React.Component {
                                       new Ingredient("sesame oil", new Fraction(1, 2), "tsp")],
                                    new Fraction(4, 1),
                                    "An exquisite delicacy from Chef Neil"));
-    
 
-    defaultRecipes.push(new Recipe("Shin Ramyun",
+    defaultRecipes.push(new Recipe("Peanut Butter Cookies",
+                                   generateRecipeID(),
+                                   [
+                                      new Ingredient("rolled oats", fractionFromString("55"), "grams"),
+                                      new Ingredient("chickpea flour", fractionFromString("60"), "grams"),
+                                      new Ingredient("coconut sugar", fractionFromString("100"), "grams"),
+                                      new Ingredient("baking soda", fractionFromString("1/2"), "teaspoon"),
+                                      new Ingredient("chunky peanut butter", fractionFromString("320"), "grams"),
+                                      new Ingredient("rice syrup", fractionFromString("70"), "grams"),
+                                      new Ingredient("water", fractionFromString("3"), "tablespoons"),
+                                      new Ingredient("vanilla extract", fractionFromString("1"), "teaspoon")],
+                                   new Fraction(12, 1),
+                                   "Imported from norecipes.com/peanut-butter-cookies-recipe"));
+
+    /*defaultRecipes.push(new Recipe("Shin Ramyun",
                                    generateRecipeID(),
                                    [
                                       new Ingredient("Shin Ramyun", new Fraction(3, 1), "packet"),
                                       new Ingredient("Egg", new Fraction(3, 1), "")],
-                                   new Fraction(4, 1),
-                                   "Patrick's favorite thing to cook"));
+                                   new Fraction(5, 1),
+                                   "Patrick's favorite thing to cook"));*/
 
     this.state = {
       recipes: defaultRecipes //[]
@@ -99,9 +112,11 @@ class App extends React.Component {
                 <Route exact path="/recipes">
                   <ListRecipes recipes={this.state.recipes} />
                 </Route>
-                <Route exact path="/addrecipe">
-                  <AddRecipe callback={this.addRecipe} />
-                </Route>
+                <Route exact path="/addrecipe" render={
+                  (props) => (
+                      <AddRecipe {...props} callback={this.addRecipe} />
+                    )
+                } />
                 <Route path="/recipe/:recipeID" render={
                   (props) => (
                       <ShowRecipe {...props} recipes={this.state.recipes} />

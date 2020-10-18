@@ -31,6 +31,7 @@ class AddRecipe extends React.Component {
     const ingredients = this.state.ingredientList;
 
     this.props.callback(new Recipe(recipeName, generateRecipeID(), ingredients, servingCount, recipeDescription));
+    this.props.history.push("/recipes");
   }
 
   addIngredient() {

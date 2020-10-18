@@ -15,6 +15,7 @@
 .navbar-light .navbar-brand {
   font-size: xx-large;
   color: var(--nav-brand-color);
+  cursor: pointer;
 }
 
 .navbar-light .navbar-brand:hover {
