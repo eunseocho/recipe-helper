@@ -11,6 +11,8 @@ import About from './routes/About';
 import AddRecipe from './routes/AddRecipe';
 import ListRecipes from './routes/ListRecipes';
 
+import Fraction from './core/Fraction';
+
 
 class App extends React.Component {
   constructor(props) {
