@@ -1,9 +1,11 @@
 :root {
-  --nav-text-color: #D9B0E9;
-  --nav-brand-color: #C09BCF;
-  --nav-hover-color: #8E5BA2;
-  --navbar-bg-color: #310A40;
-  --page-bg-color: #F4B6D4;
+  --nav-text-color: #FADCD9;
+  --nav-brand-color: #FADCD9;
+  --nav-hover-color: #F9AFA6;
+  --navbar-bg-color: #C94F51;
+  --page-bg-color: #F9F1F0;
+  --container-accent-color: #FADCD9;
+  --border-accent-color: #F9AFA6;
 }
 
 .navbar-custom {
@@ -32,6 +34,15 @@
 
 .navbar-expand .navbar-nav .nav-link:hover {
   color: var(--nav-hover-color);
+}
+
+.border-custom {
+  border-color: var(--border-accent-color)!important;
+}
+
+.rounded-container {
+  background-color: var(--container-accent-color);
+  border-radius:1rem!important;
 }
 
 body {

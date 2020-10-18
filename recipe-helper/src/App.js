@@ -38,6 +38,10 @@ class App extends React.Component {
                                    4,
                                    "Patrick's favorite thing to cook"));
 
+    for (var i = 0; i < 3; i++) {
+      defaultRecipes = defaultRecipes.concat(defaultRecipes);
+    }
+
     this.state = {
       recipes: defaultRecipes //[]
     };
@@ -69,7 +73,7 @@ class App extends React.Component {
             <Nav.Link href="/addrecipe">Add a Recipe</Nav.Link>
           </Nav>
         </Navbar>
-        <div className="row justify-content-center">
+        <div className="row justify-content-center ml-0 mr-0">
           <Router>
             <Switch>
               <Route path="/about">
@@ -78,12 +82,12 @@ class App extends React.Component {
                 </div>
               </Route>
               <Route path="/recipes">
-                <div className="pt-3 col-md-4">
-                  <ListRecipes recipes={this.recipes} />
+                <div className="pt-3 col-md-6">
+                  <ListRecipes recipes={this.state.recipes} />
                 </div>
               </Route>
               <Route path="/addrecipe">
-                <div className="pt-3 col-md-4">
+                <div className="pt-3 col-md-6">
                   <AddRecipe callback={this.addRecipe} />
                 </div>
               </Route>
