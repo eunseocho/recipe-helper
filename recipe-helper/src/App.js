@@ -7,7 +7,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-import Form from 'react-bootstrap/Form';
+import About from './routes/About';
+import AddRecipe from './routes/AddRecipe';
+import ListRecipes from './routes/ListRecipes';
 
 
 class App extends React.Component {
@@ -54,7 +56,7 @@ class App extends React.Component {
               </Route>
               <Route path="/recipes">
                 <div className="pt-3 col-md-4">
-                  <Recipes recipes={this.recipes} />
+                  <ListRecipes recipes={this.recipes} />
                 </div>
               </Route>
               <Route path="/addrecipe">
@@ -67,89 +69,6 @@ class App extends React.Component {
         </div>
       </div>
     );
-  }
-}
-
-class About extends React.Component {
-  render() {
-    return (
-      <div className="text-center">
-        <h1> Welcome to Recipe Helper! </h1>
-        <p> This app is designed for HackGT 7! More information coming soon! </p>
-      </div>
-    );
-  }
-}
-
-class Recipes extends React.Component {
-  render() {
-    return (
-      <div>
-        <p> This is the Recipes component! </p>
-      </div>
-    );
-  }
-}
-
-class AddRecipe extends React.Component {
-  render() {
-    return (
-      <div>
-        <Form>
-          <h1> Add New Recipe </h1>
-          <Form.Group controlId="formRecipeName">
-            <Form.Label>Recipe Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter Recipe Name" />
-          </Form.Group>
-          <Form.Group controlId="formRecipeDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="text" placeholder="Enter Recipe Description" />
-          </Form.Group>
-          <Form.Group controlId="formServingCount">
-            <Form.Label>Servings</Form.Label>
-            <Form.Control type="text" placeholder="Enter Recipe Description" />
-          </Form.Group>
-        </Form>
-      </div>
-    );
-  }
-}
-
-class Recipe {
-  constructor(recipeName, recipeID, ingredients, servings, description) {
-    this.recipeName = recipeName;
-    this.recipeID = recipeID;
-    this.ingredients = ingredients;
-    this.servings = servings;
-    this.description = description;
-
-    this.multiplyBy = this.multiplyBy.bind(this);
-  }
-
-  multiplyBy(scale) {
-    var newIngredients = this.ingredients.map(ingredient => ingredient.multiplyBy(scale));
-    return new Recipe(this.recipeName,
-                      this.recipeID,
-                      newIngredients,
-                      this.servings,
-                      this.description);
-  }
-}
-
-class Ingredient {
-  constructor(name, amount, unit) {
-    this.name = name;
-    this.amount = amount;
-    this.unit = unit;
-
-    this.multiplyBy = this.multiplyBy.bind(this);
-  }
-
-  multiplyBy(scale) {
-    var newAmount = this.amount.multiply(scale);
-    return new Ingredient(this.name,
-                          newAmount,
-                          this.unit);
   }
 }
 
