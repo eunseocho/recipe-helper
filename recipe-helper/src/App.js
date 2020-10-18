@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import logo from './logo.svg';
-//import './App.css';
+import './App.css';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -11,8 +10,8 @@ import Nav from 'react-bootstrap/Nav';
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <Navbar bg="dark" variant="dark">
+      <div className="main-page">
+        <Navbar className="navbar-custom ">
           <Navbar.Brand href="#">Recipe Helper</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/about">About</Nav.Link>
@@ -20,21 +19,21 @@ class App extends React.Component {
             <Nav.Link href="/addrecipe">Add a Recipe</Nav.Link>
           </Nav>
         </Navbar>
-        <div class="row justify-content-center">
+        <div className="row justify-content-center">
           <Router>
             <Switch>
               <Route path="/about">
-                <div class="pt-3 col-md-6">
+                <div className="pt-3 col-md-6">
                   <About />
                 </div>
               </Route>
               <Route path="/recipes">
-                <div class="pt-3 col-md-4">
+                <div className="pt-3 col-md-4">
                   <Recipes />
                 </div>
               </Route>
               <Route path="/addrecipe">
-                <div class="pt-3 col-md-4">
+                <div className="pt-3 col-md-4">
                   <AddRecipe />
                 </div>
               </Route>
