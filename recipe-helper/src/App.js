@@ -7,11 +7,36 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
+import Form from 'react-bootstrap/Form';
+
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipes: []
+    };
+
+    this.updateRecipes = this.updateRecipes.bind(this);
+    this.addRecipe = this.addRecipe.bind(this);
+  }
+
+  updateRecipes(newRecipes) {
+    this.setState({
+      recipes: newRecipes
+    });
+  }
+
+  addRecipe(newRecipe) {
+    this.setState({
+      recipes: this.state.recipes.concat([newRecipe])
+    });
+  }
+
   render() {
     return (
       <div className="main-page">
-        <Navbar className="navbar-custom ">
+        <Navbar className="navbar-custom">
           <Navbar.Brand href="#">Recipe Helper</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/about">About</Nav.Link>
@@ -29,12 +54,12 @@ class App extends React.Component {
               </Route>
               <Route path="/recipes">
                 <div className="pt-3 col-md-4">
-                  <Recipes />
+                  <Recipes recipes={this.recipes} />
                 </div>
               </Route>
               <Route path="/addrecipe">
                 <div className="pt-3 col-md-4">
-                  <AddRecipe />
+                  <AddRecipe callback={this.addRecipe} />
                 </div>
               </Route>
             </Switch>
@@ -48,7 +73,7 @@ class App extends React.Component {
 class About extends React.Component {
   render() {
     return (
-      <div class="text-center">
+      <div className="text-center">
         <h1> Welcome to Recipe Helper! </h1>
         <p> This app is designed for HackGT 7! More information coming soon! </p>
       </div>
@@ -70,7 +95,21 @@ class AddRecipe extends React.Component {
   render() {
     return (
       <div>
-        <p> This is the AddRecipe component! </p>
+        <Form>
+          <h1> Add New Recipe </h1>
+          <Form.Group controlId="formRecipeName">
+            <Form.Label>Recipe Name</Form.Label>
+            <Form.Control type="text" placeholder="Enter Recipe Name" />
+          </Form.Group>
+          <Form.Group controlId="formRecipeDescription">
+            <Form.Label>Description</Form.Label>
+            <Form.Control type="text" placeholder="Enter Recipe Description" />
+          </Form.Group>
+          <Form.Group controlId="formServingCount">
+            <Form.Label>Servings</Form.Label>
+            <Form.Control type="text" placeholder="Enter Recipe Description" />
+          </Form.Group>
+        </Form>
       </div>
     );
   }
