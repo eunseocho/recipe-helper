@@ -1,11 +1,10 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card'
+import '../App.css';
 
 class ListRecipes extends React.Component {
 	constructor(props) {
     super(props);
-    this.state = {recipes : props.recipes};
-    console.log(props);
   }
 
   render() {
@@ -16,7 +15,7 @@ class ListRecipes extends React.Component {
         </div>
         <div className="container pt-3 pl-0 pr-0">
           {
-            this.state.recipes.map(
+            this.props.recipes.map(
               recipe => (
                   <div className="pt-2 pb-2">
                     <RecipeCard recipe={recipe} />
@@ -33,23 +32,16 @@ class ListRecipes extends React.Component {
 class RecipeCard extends React.Component {
   constructor(props) {
     super(props);
-    const recipe = props.recipe;
-    this.state = {
-      recipeName : recipe.recipeName,
-      recipeDescription : recipe.description,
-      recipeId : recipe.recipeId,
-      recipeServings : recipe.servings
-    };
   }
 
   render() {
     return (
       <Card>
-        <Card.Header as="h3"> Recipe: {this.state.recipeName} </Card.Header>
+        <Card.Header as="h3"> Recipe: {this.props.recipe.recipeName} </Card.Header>
         <Card.Body>
-          <Card.Title> {this.state.recipeDescription} </Card.Title>
+          <Card.Title> {this.props.recipe.description} </Card.Title>
           <Card.Text>
-            Servings: {this.state.recipeServings}
+            Servings: {this.props.recipe.servings.asMixedNumberString()}
           </Card.Text>
         </Card.Body>
       </Card>

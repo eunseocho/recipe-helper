@@ -25,26 +25,30 @@ class App extends React.Component {
     defaultRecipes.push(new Recipe("Cashew Chicken",
                                    "abc",
                                    [
-                                      new Ingredient("Chicken", 1, "lb"),
-                                      new Ingredient("Cashews", 1, "cup")],
-                                   4,
+                                      new Ingredient("Chicken", new Fraction(1, 1), "lb"),
+                                      new Ingredient("Cashews", new Fraction(1, 1), "cup")],
+                                   new Fraction(4, 1),
                                    "An exquisite delicacy from Chef Neil"));
 
     defaultRecipes.push(new Recipe("Shin Ramyun",
                                    "def",
                                    [
-                                      new Ingredient("Shin Ramyun", 3, "packet"),
-                                      new Ingredient("Egg", 3, "")],
-                                   4,
+                                      new Ingredient("Shin Ramyun", new Fraction(3, 1), "packet"),
+                                      new Ingredient("Egg", new Fraction(3, 1), "")],
+                                   new Fraction(4, 1),
                                    "Patrick's favorite thing to cook"));
 
-    for (var i = 0; i < 3; i++) {
+    console.log(defaultRecipes[0]);
+
+    for (var i = 0; i < 1; i++) {
       defaultRecipes = defaultRecipes.concat(defaultRecipes);
     }
 
     this.state = {
       recipes: defaultRecipes //[]
     };
+
+    console.log(this);
 
     this.updateRecipes = this.updateRecipes.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
@@ -66,7 +70,7 @@ class App extends React.Component {
     return (
       <div className="main-page">
         <Navbar className="navbar-custom">
-          <Navbar.Brand href="#">Recipe Helper</Navbar.Brand>
+          <Navbar.Brand href="#">NomNom</Navbar.Brand>
           <Nav className="mr-auto">
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/recipes">My Recipes</Nav.Link>

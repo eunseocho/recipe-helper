@@ -14,7 +14,7 @@ class Recipe {
     return new Recipe(this.recipeName,
                       this.recipeID,
                       newIngredients,
-                      this.servings,
+                      this.servings.multiply(scale),
                       this.description);
   }
 }
