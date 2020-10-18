@@ -12,13 +12,34 @@ import AddRecipe from './routes/AddRecipe';
 import ListRecipes from './routes/ListRecipes';
 
 import Fraction from './core/Fraction';
+import Ingredient from './core/Ingredient';
+import Recipe from './core/Recipe';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    var defaultRecipes = [];
+
+    defaultRecipes.push(new Recipe("Cashew Chicken",
+                                   "abc",
+                                   [
+                                      new Ingredient("Chicken", 1, "lb"),
+                                      new Ingredient("Cashews", 1, "cup")],
+                                   4,
+                                   "An exquisite delicacy from Chef Neil"));
+
+    defaultRecipes.push(new Recipe("Shin Ramyun",
+                                   "def",
+                                   [
+                                      new Ingredient("Shin Ramyun", 3, "packet"),
+                                      new Ingredient("Egg", 3, "")],
+                                   4,
+                                   "Patrick's favorite thing to cook"));
+
     this.state = {
-      recipes: []
+      recipes: defaultRecipes //[]
     };
 
     this.updateRecipes = this.updateRecipes.bind(this);
